@@ -12,10 +12,19 @@ export default function Dictionary(props) {
         setResults(response.data);
     }
 
+    function handlePexelsResponse(response) {
+        console.log(response);
+    }
+
     function search() {
         let apiKey = "0300e14043fb59596a12t1bb17o183cf";
         let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
         axios.get(apiUrl).then(handleResponse);
+
+        let pexelsApiKey = "6QK8XMCw6V57zUgC8ZRsKAcYFxrRA7w4rNc0y1i9e6sH8OJK0Wkvp7TO";
+        let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyword}&per_page=1`;
+        let headers = { Authorization: `Bearer ${pexelsApiKey}`};
+        axios.get(pexelsApiUrl, { headers: headers }).then(handlePexelsResponse);
     }
     
     function handleSumbit(event) {
